@@ -1,0 +1,117 @@
+.header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #131921;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header .header__logo {
+    width: 100px;
+    object-fit: contain;
+    margin: 0 20px;
+    margin-top: 18px;
+}
+
+.header__search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    border-radius: 24px;
+}
+
+.header__searchInput {
+    height: 38px;
+    line-height: 15px;
+    padding: 7px 10px 10px 0;
+    border: none;
+    width: 100%;
+    font-size: 15px;
+    color: #111;
+    text-indent: 8px;
+    outline: none;
+}
+
+.header-search-icon {
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #febd69;
+    height: 38px;
+    cursor: pointer;
+    overflow: hidden;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    color: #111;
+}
+
+.header-search-icon:hover {
+    background-color: #f3a847;
+}
+
+.header__option {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    padding: 3.5px 9px;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.header__nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.header__optionBasket,
+.location-option {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 3.5px 9px;
+    width: fit-content;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    margin: 0 5px;
+}
+
+.header__optionBasket:hover,
+.location-option:hover {
+    border: 1px solid #fff;
+}
+
+.header__nav .header__option:hover {
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.location-option .header__option {
+    margin-left: 8px;
+    display: flex;
+}
+
+.header__optionLineOne {
+    color: #ccc;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    height: 14px;
+}
+
+.header__optionLineTwo {
+    color: #fff;
+    font-size: 14px;
+    height: 15px;
+    line-height: 15px;
+    font-weight: 700;
+}
+
+.location-icon {
+    width: 15px;
+    height: 18px;
+}
