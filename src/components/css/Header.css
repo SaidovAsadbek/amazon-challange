@@ -17,12 +17,21 @@
 
 .header__search {
     display: flex;
-    flex: 1;
+    flex: 1 1 0px;
     align-items: center;
     border-radius: 24px;
 }
 
+.search_input {
+    display: flex;
+    flex: 1 1 0px;
+    position: static;
+    height: 38px;
+    background: #fff;
+}
+
 .header__searchInput {
+    display: flex;
     height: 38px;
     line-height: 15px;
     padding: 7px 10px 10px 0;

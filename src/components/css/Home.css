@@ -1,0 +1,31 @@
+.home {
+    background-color: #EAEDED;
+    position: relative;
+}
+
+.home__container {
+    max-width: 100%;
+    width: 1500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.home__banner {
+    width: 100%;
+    height: 600px;
+}
+
+.home__image {
+    width: 100%;
+    z-index: -1;
+    margin-bottom: -150px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, .1));
+}
+
+.home__row {
+    display: flex;
+    z-index: 1;
+    margin: 0 5px;
+    position: absolute;
+    bottom: -20%;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "../css/Header.css";
 import {
     Search,
@@ -9,14 +10,14 @@ import {
 const Header = () => {
     return (
         <div className="header">
-            <a href="/" className="brand">
+            <NavLink to="/" className="brand">
                 <img
                     src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
-                    alt=""
+                    alt="amazon.com"
                     className="header__logo"
                 />
-            </a>
-            <a href="/" className="location-option">
+            </NavLink>
+            <NavLink to="/" className="location-option">
                 <div className="location-icon">
                     <LocationOnOutlined />
                 </div>
@@ -24,32 +25,34 @@ const Header = () => {
                     <span className="header__optionLineOne">Deliver to</span>
                     <span className="header__optionLineTwo">Uzbekistan</span>
                 </div>
-            </a>
+            </NavLink>
             <form className="header__search">
-                <input type="text" className="header__searchInput" />
+                <div className="search_input">
+                    <input type="text" className="header__searchInput" />
+                </div>
                 <button className="header-search-icon">
                     <Search className="header__searchIcon" />
                 </button>
             </form>
             <div className="header__nav">
-                <a href="/" className="header__option">
+                <NavLink to="/" className="header__option">
                     <span className="header__optionLineOne">Hello Guest</span>
                     <span className="header__optionLineTwo">Sign In</span>
-                </a>
-                <a href="/" className="header__option">
+                </NavLink>
+                <NavLink to="/" className="header__option">
                     <span className="header__optionLineOne">Returns</span>
                     <span className="header__optionLineTwo">& Orders</span>
-                </a>
-                <a href="/" className="header__option">
+                </NavLink>
+                <NavLink to="/" className="header__option">
                     <span className="header__optionLineOne">Your</span>
                     <span className="header__optionLineTwo">Prime</span>
-                </a>
-                <a href="/" className="header__optionBasket">
+                </NavLink>
+                <NavLink to="/purchase/cart" className="header__optionBasket">
                     <AddShoppingCartOutlined />
                     <span className="header__optionLineTwo header__basketCount">
                         0
                     </span>
-                </a>
+                </NavLink>
             </div>
         </div>
     );

@@ -1,0 +1,12 @@
+.purchase-container {
+    max-width: 100%;
+    min-width: 998px;
+    margin: 0 auto;
+    padding: 14px 18px 18px;
+    background-color: #EAEDED;
+    position: relative;
+}
+
+.purchase-container .row {
+    position: relative;
+}
