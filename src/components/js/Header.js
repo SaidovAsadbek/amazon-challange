@@ -32,24 +32,24 @@ const Header = () => {
                 </button>
             </form>
             <div className="header__nav">
-                <div className="header__option">
+                <a href="/" className="header__option">
                     <span className="header__optionLineOne">Hello Guest</span>
                     <span className="header__optionLineTwo">Sign In</span>
-                </div>
-                <div className="header__option">
+                </a>
+                <a href="/" className="header__option">
                     <span className="header__optionLineOne">Returns</span>
                     <span className="header__optionLineTwo">& Orders</span>
-                </div>
-                <div className="header__option">
+                </a>
+                <a href="/" className="header__option">
                     <span className="header__optionLineOne">Your</span>
                     <span className="header__optionLineTwo">Prime</span>
-                </div>
-                <div className="header__optionBasket">
+                </a>
+                <a href="/" className="header__optionBasket">
                     <AddShoppingCartOutlined />
                     <span className="header__optionLineTwo header__basketCount">
                         0
                     </span>
-                </div>
+                </a>
             </div>
         </div>
     );
