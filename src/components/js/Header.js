@@ -40,7 +40,7 @@ const Header = () => {
                 </button>
             </form>
             <div className="header__nav">
-                <NavLink to="/" className="header__option">
+                <NavLink to="/register/login" className="header__option">
                     <span className="header__optionLineOne">Hello Guest</span>
                     <span className="header__optionLineTwo">Sign In</span>
                 </NavLink>
