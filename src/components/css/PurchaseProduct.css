@@ -112,17 +112,37 @@
     margin: 4px 0;
 }
 
+.content-color .flex button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.content-color .flex button,
 .content-color .flex a {
     font-size: 12px;
     color: #007185;
 }
 
+.content-color .flex button:hover,
 .content-color .flex a:hover {
     text-decoration: underline;
+}
+
+.content-price {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
 .content-price p {
     font-size: 18px;
     color: #0F1111;
     font-weight: 700;
+}
+
+.shopping__cartItems {
+    margin-bottom: 10px;
 }

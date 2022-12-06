@@ -7,7 +7,12 @@ import {
     AddShoppingCartOutlined,
 } from "@mui/icons-material";
 
+// basket data layer
+import { useStateValue } from "./StateProvider";
+
 const Header = () => {
+    const [{ basket }, dispatch] = useStateValue();
+
     return (
         <div className="header">
             <NavLink to="/" className="brand">
@@ -50,7 +55,7 @@ const Header = () => {
                 <NavLink to="/purchase/cart" className="header__optionBasket">
                     <AddShoppingCartOutlined />
                     <span className="header__optionLineTwo header__basketCount">
-                        0
+                        {basket.length}
                     </span>
                 </NavLink>
             </div>
