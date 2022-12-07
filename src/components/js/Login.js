@@ -2,21 +2,28 @@ import React, { useState } from "react";
 import "../css/Login.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "./firebase";
+import { InfinitySpin } from "react-loader-spinner";
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const signIn = (e) => {
         e.preventDefault();
-
-        auth.signInWithEmailAndPassword(email, password)
-            .then((auth) => {
-                console.log(auth);
-                navigate("/");
-            })
-            .catch((error) => alert(error.message));
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 3999);
+        setTimeout(() => {
+            auth.signInWithEmailAndPassword(email, password)
+                .then((auth) => {
+                    console.log(auth);
+                    navigate("/");
+                })
+                .catch((error) => alert(error.message));
+        }, 4000);
     };
 
     const register = (e) => {
@@ -59,6 +66,7 @@ const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+
                     <button
                         type="submit"
                         onClick={signIn}
@@ -66,6 +74,22 @@ const Login = () => {
                     >
                         Sign In
                     </button>
+                    {loading ? (
+                        <div
+                            className="loader"
+                            style={{ position: "relative" }}
+                        >
+                            <InfinitySpin
+                                className="infinity-spinner"
+                                color="crimson"
+                                ariaLabel="three-dots-loading"
+                                wrapperStyle
+                                wrapperClass
+                            />
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </form>
                 <p>
                     By continuing, you agree to Amazon's Conditions of Use and

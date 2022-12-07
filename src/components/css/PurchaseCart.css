@@ -9,4 +9,13 @@
 
 .purchase-container .row {
     position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+}
+
+.cart-header .flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

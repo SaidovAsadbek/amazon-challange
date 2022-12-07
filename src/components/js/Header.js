@@ -9,9 +9,17 @@ import {
 
 // basket data layer
 import { useStateValue } from "./StateProvider";
+import { auth } from "./firebase";
 
 const Header = () => {
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
+    // console.log(user.email, "Header User");
+    const handleAuthentication = () => {
+        if (user) {
+            auth.signOut();
+        } else {
+        }
+    };
 
     return (
         <div className="header">
@@ -40,9 +48,15 @@ const Header = () => {
                 </button>
             </form>
             <div className="header__nav">
-                <NavLink to="/register/login" className="header__option">
-                    <span className="header__optionLineOne">Hello Guest</span>
-                    <span className="header__optionLineTwo">Sign In</span>
+                <NavLink
+                    to={!user && "/register/login"}
+                    onClick={handleAuthentication}
+                    className="header__option"
+                >
+                    <span className="header__optionLineOne">Hello, Guest</span>
+                    <span className="header__optionLineTwo">
+                        {user ? "Sign Out" : "Sign In"}
+                    </span>
                 </NavLink>
                 <NavLink to="/" className="header__option">
                     <span className="header__optionLineOne">Returns</span>

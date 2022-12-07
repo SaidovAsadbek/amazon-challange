@@ -7,7 +7,7 @@ import PurchaseProduct from "./PurchaseProduct";
 import { useStateValue } from "./StateProvider";
 
 const PurchaseCart = () => {
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
 
     return (
         <div className="purchase-container">
@@ -18,7 +18,15 @@ const PurchaseCart = () => {
                     <div className="active-cart">
                         <div className="cart-inner">
                             <div className="cart-header">
-                                <h2>Your Shopping Cart</h2>
+                                <div className="flex">
+                                    <h2>Your Shopping Cart</h2>
+                                    <div className="user-panel">
+                                        <h2>Hello, {user?.email} </h2>
+                                        <small>
+                                            <strong>ID:</strong> {user?.uid}
+                                        </small>
+                                    </div>
+                                </div>
 
                                 <a href="/" className="selected-item">
                                     DeSelect all items
