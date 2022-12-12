@@ -51,9 +51,10 @@ const Header = () => {
                 <NavLink
                     to={!user && "/register/login"}
                     onClick={handleAuthentication}
-                    className="header__option"
-                >
-                    <span className="header__optionLineOne">Hello, Guest</span>
+                    className="header__option">
+                    <span className="header__optionLineOne">
+                        Hello, {!user ? "Guest" : user.email}
+                    </span>
                     <span className="header__optionLineTwo">
                         {user ? "Sign Out" : "Sign In"}
                     </span>

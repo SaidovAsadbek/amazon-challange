@@ -24,8 +24,55 @@
 
 .home__row {
     display: flex;
+    flex-wrap: wrap;
     z-index: 1;
     margin: 0 5px;
     position: absolute;
     bottom: -20%;
+}
+
+@media (min-width: 881px) and (max-width: 1180px) {
+    .home__row {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .home__row .product {
+        width: calc(100% / 3);
+    }
+}
+
+@media (min-width: 591px) and (max-width: 880px) {
+    .home__row {
+        position: static;
+        bottom: 0;
+        justify-content: center;
+    }
+
+    .home__row .product {
+        width: calc(100% / 2);
+        margin: 10px 0;
+    }
+
+    .home__banner {
+        height: auto;
+    }
+}
+
+@media (max-width: 590px) {
+
+    .home__banner {
+        height: auto;
+    }
+
+    .home__row {
+        position: static;
+        bottom: 0;
+    }
+
+    .product {
+        max-width: 100% !important;
+        width: 100%;
+        margin: 10px 0;
+    }
 }

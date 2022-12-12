@@ -11,7 +11,7 @@ export const getBasketTotal = (basket) =>
 
 const reducer = (state, action) => {
     // console.log(state, "state");
-    console.log(action, "action");
+    // console.log(action, "action");
     switch (action.type) {
         case "ADD_TO_BASKET":
             return {

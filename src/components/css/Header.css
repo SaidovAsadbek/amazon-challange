@@ -124,3 +124,45 @@
     width: 15px;
     height: 18px;
 }
+
+/* add responsive */
+@media only screen and (max-width: 992px) {
+    .header {
+        flex-wrap: wrap;
+        height: auto;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .header__search {
+        flex: none;
+    }
+
+    .header__nav  {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 582px) {
+    .header {
+        width: 100%;
+        padding: 5px 20px;
+    }
+
+    .brand {
+        float: left;
+    }
+
+    .location-option {
+        float: right;
+    }
+
+    .header__search {
+        width: 100%;
+        margin-top: 7px;
+    }
+
+    .header__nav {
+        margin-top: 7px;
+    }
+}
