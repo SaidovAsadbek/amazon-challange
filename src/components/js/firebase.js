@@ -1,11 +1,13 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+// Import the functions you need from the SDKs you need
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyBoQFOy2-DCGaVDB31nABZbJq9Tc7QoghI",
     authDomain: "fir-9230e.firebaseapp.com",
+    databaseURL: "https://fir-9230e-default-rtdb.firebaseio.com",
     projectId: "fir-9230e",
     storageBucket: "fir-9230e.appspot.com",
     messagingSenderId: "751888710678",
@@ -17,5 +19,6 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export { db, auth };
+export { db, auth, googleProvider };

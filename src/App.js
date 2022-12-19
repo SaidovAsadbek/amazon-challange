@@ -7,19 +7,19 @@ import Header from "./components/js/Header";
 import Home from "./components/js/Home";
 import PurchaseCart from "./components/js/PurchaseCart";
 import Login from "./components/js/Login";
+import Orders from "./components/js/Orders";
 import { auth } from "./components/js/firebase";
 import { useStateValue } from "./components/js/StateProvider";
 
-// payment page component and initial stripe
-import Payment from "./components/js/Payment";
-import { loadStripe } from "@stripe/stripe-js";
+// payment
 import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import Payment from "./components/js/Payment";
 
-const promise = loadStripe(
-    "pk_test_51LURq3HnZqhZ7uCLhAU63mYCOIzW9iEdicMsvFGHuSNdVKXl0cSjLya9FEyVEH1jEkQa0564y6sJOlDxFMWli7RY00ZmTd83TE"
-);
+const Published_KEY =
+    "pk_test_51LURq3HnZqhZ7uCLhAU63mYCOIzW9iEdicMsvFGHuSNdVKXl0cSjLya9FEyVEH1jEkQa0564y6sJOlDxFMWli7RY00ZmTd83TE";
 
-// console.log(promise);
+const stripePromise = loadStripe(Published_KEY); // Published code
 
 function App() {
     // signIn/register... the user logged and logout
@@ -27,8 +27,6 @@ function App() {
 
     useEffect(() => {
         auth.onAuthStateChanged((authUser) => {
-            // console.log("THIS USER IS >>>", authUser);
-
             if (authUser) {
                 // the user just logged in / the user was logged in
                 dispatch({
@@ -43,7 +41,7 @@ function App() {
                 });
             }
         });
-    }, []);
+    }, [dispatch]);
 
     return (
         <Router>
@@ -58,13 +56,14 @@ function App() {
                             </>
                         }
                     />
+                    <Route path="/orders" element={<Orders />} />
                     <Route path="/register/login" element={<Login />} />
                     <Route
-                        path="/product/payment"
+                        path="/purchase/checkout"
                         element={
                             <>
                                 <Header />
-                                <Elements stripe={promise}>
+                                <Elements stripe={stripePromise}>
                                     <Payment />
                                 </Elements>
                             </>

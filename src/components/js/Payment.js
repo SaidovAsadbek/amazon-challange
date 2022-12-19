@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
-import "../css/Payment.css";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useStateValue } from "./StateProvider";
-import PurchaseProduct from "./PurchaseProduct";
-import { NavLink, useNavigate } from "react-router-dom";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
-
+import { useNavigate, NavLink } from "react-router-dom";
+import CurrencyFormat from "react-currency-format";
+import PurchaseProduct from "./PurchaseProduct";
 import axios from "./axios";
 
 const Payment = () => {
     const [{ basket, user }, dispatch] = useStateValue();
     const navigate = useNavigate();
-
-
-    // console.log(basket);
 
     const stripe = useStripe();
     const elements = useElements();
@@ -27,19 +22,21 @@ const Payment = () => {
     const [clientSecret, setClientSecret] = useState(true);
 
     useEffect(() => {
-        // generate the special stripe secret which also us to charge the customer
-
         const getClientSecret = async () => {
-            const response = await axios({
-                method: "post",
-                url: `/payment/create?total=${getBasketTotal(basket) * 100}`, //
-            });
-
-            setClientSecret(response.data.clientSecret);
+            await axios({
+                method: "POST",
+                url: `/payment/create?total=${getBasketTotal(basket) * 100}`,
+            })
+                .then((response) => {
+                    // console.log(response.data.clientSecret);
+                    setClientSecret(response.data.clientSecret);
+                })
+                .catch((error) => console.log(error));
         };
-
         getClientSecret();
     }, [basket]);
+
+    // console.log("SECRET", clientSecret);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,19 +48,38 @@ const Payment = () => {
                     card: elements.getElement(CardElement),
                 },
             })
-            .then(async (paymentIndent) => {
-                // paymentIndent = payment confirmation
+            .then(({ paymentIntent }) => {
+                // paymentIntent = payment confirmation
+                console.log(paymentIntent);
+                // db.collection("users")
+                //     .doc(user?.uid)
+                //     .collection("orders")
+                //     .doc("CwCqSSYmB9yBJ97Bcu8d")
+                //     .set({
+                //         basket: basket,
+                //         amount: paymentIntent.amount,
+                //         created: paymentIntent.created,
+                //     })
+                //     .then((data) => console.log(data))
+                //     .catch((err) => console.log(err));
+
                 setSucceeded(true);
                 setError(null);
                 setProcessing(false);
 
+                // dispatch({
+                //     type: "EMPTY_BASKET",
+                // });
+
                 navigate("/orders");
-            });
+            })
+            .catch((error) => console.log("PAYLOAD", error));
+        console.log("payload data", payload);
     };
 
     const handleChange = (e) => {
         setDisabled(e.empty);
-        setError(e.error ? e.error.message : null); // null changed ""
+        setError(e.error ? e.error.message : null);
     };
 
     return (
@@ -71,13 +87,9 @@ const Payment = () => {
             <div className="payment__container">
                 <h1>
                     Checkout (
-                    <NavLink to="/purchase/cart">
-                        {basket?.length} items
-                    </NavLink>
-                    )
+                    <NavLink to="/checkout">{basket?.length} items</NavLink>)
                 </h1>
 
-                {/* Payment section - delivery address */}
                 <div className="payment__section">
                     <div className="payment__title">
                         <h3>Delivery Address</h3>
@@ -89,14 +101,12 @@ const Payment = () => {
                     </div>
                 </div>
 
-                {/* Payment section - Review items */}
                 <div className="payment__section">
                     <div className="payment__title">
-                        <h3>Review items and Delivery</h3>
+                        <h3>Review items and delivery</h3>
                     </div>
-
                     <div className="payment__items">
-                        {basket?.map((item, i) => (
+                        {basket.map((item, i) => (
                             <PurchaseProduct
                                 key={i}
                                 id={item.id}
@@ -110,13 +120,11 @@ const Payment = () => {
                     </div>
                 </div>
 
-                {/* Payment section - Payment */}
                 <div className="payment__section">
                     <div className="payment__title">
-                        <h3>Payment Methods</h3>
+                        <h3>Payment Method</h3>
                     </div>
                     <div className="payment__details">
-                        {/* Payment By stripe */}
                         <form onSubmit={handleSubmit}>
                             <CardElement onChange={handleChange} />
 
@@ -144,8 +152,8 @@ const Payment = () => {
                                     </span>
                                 </button>
                             </div>
-                            {/* Payment Errors */}
-                            {error && <div>{error}</div>}
+                            {error ||
+                                (succeeded && <div>{error || succeeded}</div>)}
                         </form>
                     </div>
                 </div>
@@ -153,5 +161,7 @@ const Payment = () => {
         </div>
     );
 };
+
+// buy now button inner codes
 
 export default Payment;
