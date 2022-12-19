@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../css/Login.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { auth } from "./firebase";
+import { auth, googleProvider } from "./firebase";
 import { InfinitySpin } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -24,6 +26,20 @@ const Login = () => {
                 })
                 .catch((error) => alert(error.message));
         }, 4000);
+        toast("You have successfully signed in!");
+    };
+
+    const signInWithGoogle = (e) => {
+        e.preventDefault();
+        auth.signInWithPopup(googleProvider)
+            .then((result) => {
+                console.log(result);
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        toast("You have successfully signed in!");
     };
 
     const register = (e) => {
@@ -37,10 +53,12 @@ const Login = () => {
                 }
             })
             .catch((error) => alert(error.message));
+        toast("You have successfully registered!");
     };
 
     return (
         <div className="login">
+            <ToastContainer />
             <div className="login-link">
                 <NavLink to="/" className="login-page-router">
                     <img
@@ -70,15 +88,13 @@ const Login = () => {
                     <button
                         type="submit"
                         onClick={signIn}
-                        className="login__signInButton"
-                    >
+                        className="login__signInButton">
                         Sign In
                     </button>
                     {loading ? (
                         <div
                             className="loader"
-                            style={{ position: "relative" }}
-                        >
+                            style={{ position: "relative" }}>
                             <InfinitySpin
                                 className="infinity-spinner"
                                 color="crimson"
@@ -98,6 +114,11 @@ const Login = () => {
 
                 <button onClick={register} className="login__registerButton">
                     Create your Amazon account
+                </button>
+                <button
+                    onClick={signInWithGoogle}
+                    className="login__registerButton">
+                    Sign in with Google
                 </button>
             </div>
         </div>

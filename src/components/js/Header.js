@@ -11,13 +11,16 @@ import {
 import { useStateValue } from "./StateProvider";
 import { auth } from "./firebase";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Header = () => {
     const [{ basket, user }, dispatch] = useStateValue();
     // console.log(user.email, "Header User");
     const handleAuthentication = () => {
         if (user) {
             auth.signOut();
-        } else {
+            toast("You have signed out!");
         }
     };
 
@@ -59,7 +62,7 @@ const Header = () => {
                         {user ? "Sign Out" : "Sign In"}
                     </span>
                 </NavLink>
-                <NavLink to="/" className="header__option">
+                <NavLink to="/orders" className="header__option">
                     <span className="header__optionLineOne">Returns</span>
                     <span className="header__optionLineTwo">& Orders</span>
                 </NavLink>
@@ -74,6 +77,7 @@ const Header = () => {
                     </span>
                 </NavLink>
             </div>
+            <ToastContainer />
         </div>
     );
 };

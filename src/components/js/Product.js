@@ -2,6 +2,8 @@ import React from "react";
 import "../css/Product.css";
 import { StarBorderOutlined } from "@mui/icons-material";
 import { useStateValue } from "./StateProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({ id, title, price, rating, productImage, color }) => {
     // const [state, dispatch] = useStateValue();
@@ -20,11 +22,14 @@ const Product = ({ id, title, price, rating, productImage, color }) => {
                 productImage: productImage,
             },
         });
+
+        toast("Product added to basket");
     };
 
     return (
         <div className="product">
             <div className="product__info">
+                <ToastContainer className="toast-container" />
                 <div className="product__title">
                     <h2>{title}</h2>
                     <strong>${price}</strong>
